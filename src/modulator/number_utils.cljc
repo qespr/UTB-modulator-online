@@ -1,5 +1,4 @@
-(ns modulator.number-utils
-  (:gen-class))
+(ns modulator.number-utils)
 
 
 (defn do-binarky

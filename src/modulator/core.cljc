@@ -1,8 +1,7 @@
 (ns modulator.core
   (:require [modulator.number-utils :as nu]
             [clojure.string :as cstr]
-            [clojure.set])
-  (:gen-class))
+            [clojure.set]))
 
 ;;Kódovací tabulky
 (def RLL-1
