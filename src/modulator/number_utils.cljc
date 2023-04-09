@@ -54,7 +54,7 @@
     (when
         ;;Magické čísla jsou rozsah všech tisknutelných ASCII znaků
         (not (<= 32 znak-hodnota 126))
-      (throw (ex-info (str "Znak: '" znak "' je mimo rozsah základní ASCII a nelze jej modulovat")
+      (throw (ex-info (str "Znak: '" znak "' je mimo rozsah základní ASCII abecedy a nelze jej modulovat")
                       {:kod-znaku znak-hodnota
                        :platny-rozsah-znaku '(32 126)})))
   (zarovnej-na-byte (do-binarky znak-hodnota))))
