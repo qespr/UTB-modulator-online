@@ -1,0 +1,9 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.0"}
+        org.clojure/clojurescript {:mvn/version "1.10.439"}}
+ :aliases {:dev {:extra-paths ["resources" "devcards"]
+                 :extra-deps {com.bhauman/figwheel-main {:mvn/version "0.2.0-SNAPSHOT"}
+                              devcards {:mvn/version "0.2.6"}}}
+           :release {:extra-paths ["resources" "devcards"]
+                     :extra-deps {com.bhauman/figwheel-main {:mvn/version "0.2.0-SNAPSHOT"}
+                                  devcards {:mvn/version "0.2.6"}}}}}
