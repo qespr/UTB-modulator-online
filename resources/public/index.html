@@ -4,8 +4,49 @@
     <meta charset="UTF-8">
   </head>
   <body>
+    <style>
+      table, th, td {
+      border: 1px solid black;
+      }
+    </style>
+    <h1>CD Modulátor</h1>
+    <p>Program stejně jako školní verze nepodporuje diakritiku protože je to stejně zbytečné, narozdíl od školní verze vám však převede jakkoliv dlouhý vstup/výstup.</p>
     <div id="app">
-    </div>
+      <p>Vstup: <input id="text-vstup" type="text" placeholder="Vstupní text ke zpracování"></input></p>
+      <button id="moduluj-cudl">Proveď modulaci</button>
+      <button id="demoduluj-cudl">Proveď demodulaci</button>
+
+      <!-- Binárně -->
+      <!-- Modulace: (tabulka)-->
+      <p>Vstupní text binárně: <span id="bin-out"> </span></p>
+      <p id="error-text"></p>
+      <table>
+	<tr>
+	  <th>X</th>
+	  <th>Modulováno</th>
+	  <th>Počet pulzů (efektivita)</th>
+	</tr>
+	<tr>
+	  <td>FM</td>
+	  <td id="FM-modul">-</td>
+	  <td id="FM-pulz">-</td>
+	</tr>
+	<tr>
+	  <td>MFM</td>
+	  <td id="MFM-modul">-</td>
+	  <td id="MFM-pulz">-</td>
+	</tr>
+	<tr>
+	  <td>RLL-1</td>
+	  <td id="RLL1-modul">-</td>
+	  <td id="RLL1-pulz">-</td>
+	</tr>
+	<tr>
+	  <td>RLL-2</td>
+	  <td id="RLL2-modul">-</td>
+	  <td id="RLL2-pulz">-</td>
+	</tr>
+      </div>
     <script src="js/dev.js" type="text/javascript"></script>
   </body>
 </html>
