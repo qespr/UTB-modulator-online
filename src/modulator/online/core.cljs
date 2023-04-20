@@ -27,7 +27,10 @@
   "Převede binární znak na jeho ASCII reprezentaci
    Přepsání originální java funkce protože se s portabilitou zas tak nepočítalo."
   [bin-znak]
-  (str (js/parseInt bin-znak 2)))
+  (let [cislo (js/parseInt bin-znak 2)]
+    (if (<= 32 cislo 126)
+      (js/String.fromCharCode cislo)
+      (throw (ex-info (str "Sekvence není platná pro tuto modulaci (vyšlo neplatné číslo " bin-znak ")") nil)))))
 
 (defn bin-to-string
   "Převede binární String do ASCII stringu"
@@ -40,26 +43,32 @@
 (defn try-decode
   "Jenom vyzkouší dekodování a vrací hezky naformátovanou chybu když je nemožné provézt demodulaci danou funkcí"
   [decode-fun vstup]
-  (try
-    (bin-to-string (decode-fun vstup))
-    (catch ExceptionInfo e
-      (let [data (ex-data e)
-            prebyva (:prebyvajici-data data)
-            uspesne (:uspecna-demodulace data)]
-        (str (ex-message e)
-             (when uspesne
-               (str " úspěšná část: \"" uspesne))
-             (when prebyva
-               (str "\" Přebývá vám: \"" prebyva "\"")))))))
+  (if (and (cstr/includes? vstup "P")
+           (cstr/includes? vstup "N"))
+    (try
+      (println "running for " decode-fun)
+      (bin-to-string (decode-fun vstup))
+      (catch ExceptionInfo e
+        (println "error")
+        (let [data (ex-data e)
+              prebyva (:prebyvajici-data data)
+              uspesne (:uspecna-demodulace data)]
+          (str "msg: " (ex-message e)
+               (when uspesne
+                 (str " úspěšná část: \"" uspesne))
+               (when prebyva
+                 (str "\" Přebývá vám: \"" prebyva "\""))))))
+    "Nelze demodulovat nemodulovaný text!"))
 
 (defn demoduluj-vstup
   "Provede všechny demodulace, ty které nelze provézt budou označeny"
   []
-  ;; Todo: Při zpětném převodu z binárky přijímat znak jen pokud je v ASCII rozsahu
-  ;;       Zachytí se tak více neplatných sekvencí
   (set-element-text "error-text" "")
   (set-element-text "modulace-info" "Demodulováno")
-  (let [input (get-element-property "text-vstup" "value")
+  (let [tinput (cstr/trim (get-element-property "text-vstup" "value"))
+        input (if (= "" tinput)
+                nil
+                tinput)
         fm (try-decode m/fm-decode input)
         mfm (try-decode m/mfm-decode input)
         rll1 (try-decode (fn [x] (m/rll-decode m/RLL-1 x)) input)
