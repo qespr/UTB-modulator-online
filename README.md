@@ -30,3 +30,10 @@ Je s tím celkem oser, nevím kdo by to chtěl dělat ale pro případ že někd
 
 Kód není plně naportovaný, přepsáno je jen to nejnutnější aby to fungovalo, to jen aby jste se nedivily těm warningům při
 kompilaci.
+
+## Obrázky
+
+Když už sem je udělal tak co s něma.
+
+![modulace](res/modulace.png)
+![demodulace](res/demodulace.png)
